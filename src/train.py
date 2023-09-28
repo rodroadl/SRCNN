@@ -57,8 +57,6 @@ def train(args):
     best_epoch = 0
     best_psnr = 0.
 
-    global_step = 0
-    n_train = len(train_dataset)
     for epoch in range(args.num_epochs):
         model.train()
         epoch_losses = AverageMeter()
@@ -76,14 +74,6 @@ def train(args):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-                global_step += 1
-        torch.save(model.state_dict(), os.path.join(args.outputs_dir, 'epoch_{}.pth'.format(epoch)))
-        logging.info(f'Checkpoint {epoch} saved!')
-
-        # evaluation round
-        # division_step = (n_train // (5 * args.batch_size))
-        # if division_step > 0:
-        #     if global_step % division_step == 0:
         model.eval()
         epoch_psnr = AverageMeter()
         for batch in eval_dataloader:
@@ -105,9 +95,9 @@ def train(args):
 def get_args():
     # setting up argumentparser
     parser = argparse.ArgumentParser()
-    parser.add_argument('--train-file', type=str, required=True)
-    parser.add_argument('--eval-file', type=str, required=True)
-    parser.add_argument('--outputs-dir', type=str, required=True)
+    parser.add_argument('--train-file', type=str)
+    parser.add_argument('--eval-file', type=str)
+    parser.add_argument('--outputs-dir', type=str)
     parser.add_argument('--scale', type=int, default=3)
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--batch-size', type=int, default=16)
