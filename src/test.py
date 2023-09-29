@@ -17,6 +17,7 @@ import numpy as np
 import PIL.Image as pil_image
 
 from model import SRCNN
+import utils
 from utils import convert_rgb_to_ycbcr, convert_ycbcr_to_rgb, psnr
 
 def main():
@@ -63,7 +64,7 @@ def main():
     with torch.no_grad():
         preds = model(y).clamp(0., 1.)
     
-    psnr = psnr(y, preds)
+    psnr = utils.psnr(y, preds)
     print('psnr: {:.2f}'.format(psnr))
 
     # save the output of SRCNN

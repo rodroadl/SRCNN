@@ -94,6 +94,16 @@ def convert_ycbcr_to_rgb(img):
         raise Exception('Unknown Type', type(img))
     
 def psnr(img1, img2):
+    '''
+    calculate PSNR(dB) of img1 and img2
+
+    Parameters:
+        img1 - input
+        img2 - input
+    
+    Return:
+        PSNR(dB)
+    '''
     return 10. * torch.log10(1. / torch.mean((img1-img2)**2))
 
 
