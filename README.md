@@ -25,7 +25,7 @@ The 91-image, Set5 dataset converted to HDF5 can be downloaded from the links be
 
 
 ```bash
-python train.py --train-file "data/91-image_x3.h5" \
+python src/train.py --train-file "data/91-image_x3.h5" \
                 --eval-file "data/Set5_x3.h5" \
                 --outputs-dir "pth" \
                 --scale 3 \
@@ -39,7 +39,7 @@ python train.py --train-file "data/91-image_x3.h5" \
 The 91-image, Set5 dataset of *png* type can be downloaded from [here](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU?usp=sharing).
 
 ```bash
-python test.py --weights-file "pth/srcnn_x3.pth" \
+python src/test.py --weights-file "pth/srcnn_x3.pth" \
                --image-file "data/butterfly.png" \
                --scale 3
 ```
